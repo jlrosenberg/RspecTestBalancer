@@ -1,0 +1,50 @@
+{
+  "version": "0.1.0",
+  "number_of_pods": "3",
+  "date_generated": "DATE",
+  "pods": [
+    {
+      "pod_name": "RspecTestPod1",
+      "estimated_run_time": "66.51",
+      "number_of_files": "2",
+      "pattern_string":"--pattern \"path/to/testfile_spec.rb, path/to/testfile_spec_2.rb\"",
+
+      "files": [
+        {
+          "filepath": "path/to/testfile_spec.rb",
+          "estimated_run_time":"53.64",
+          "test_cases": "12"
+        },        {
+          "filepath":  "path/to/testfile_spec_2.rb",
+          "estimated_run_time":"12.87",
+          "test_cases": "4"
+        }
+      ]
+    },
+    {
+      "pod_name": "RspecTestPod1",
+      "estimated_run_time": "66.51",
+      "number_of_files": "2",
+      "pattern_string":"--pattern \"path/to/testfile_spec_3.rb, path/to/testfile_spec_4.rb\"",
+
+      "files": [
+        {
+          "filepath": "path/to/testfile_spec_3.rb",
+          "estimated_run_time":"53.64",
+          "test_cases": "12"
+        },        {
+          "filepath": "path/to/testfile_spec_4.rb",
+          "estimated_run_time":"12.87",
+          "test_cases": "4"
+        }
+      ]
+    },
+    {
+      "pod_name": "RspecTestCatchAllPod",
+      "estimated_run_time": "0",
+      "number_of_files": "0",
+      "pattern_string":"--exclude-pattern \"path/to/testfile_spec.rb, path/to/testfile_spec_2.rb, path/to/testfile_spec_3.rb, path/to/testfile_spec_4.rb\"",
+      "files": []
+    }
+  ]
+}
