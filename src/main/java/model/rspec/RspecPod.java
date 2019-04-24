@@ -1,3 +1,8 @@
+package model.rspec;
+
+import model.Pod;
+import model.TestFile;
+import model.TestType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -5,25 +10,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Pod {
+public class RspecPod implements Pod {
 
     private List<TestFile> files;
     private String name;
     private double estimatedTime;
 
 
-    public Pod(String name){
+    public RspecPod(String name){
         this.name = name;
         estimatedTime=0;
         files= new ArrayList<TestFile>();
 
     }
 
+    @Override
     public String getName(){
         return this.name;
     }
 
+    @Override
     public void addFile(TestFile testFile){
+        if(testFile.getType() != this.getTestType()){
+            throw new IllegalArgumentException("TestFile cannot be added because it contains a different type of Test than" +
+                "this pod is configured to execute");
+        }
+
         //TODO Add check to make sure we aren't adding a duplicate file
         if(!testFile.isSupportFile()){
             files.add(testFile);
@@ -34,15 +46,18 @@ public class Pod {
 
     }
 
+    @Override
     public List<TestFile> getFiles(){
         //TODO Return a deep clone of files list instead of actual object to prevent accidental mutation.
         return files;
     }
 
+    @Override
     public double getEstimatedRunTime(){
         return this.estimatedTime;
     }
 
+    @Override
     public String getPatternString(){
         return files.stream().map(f -> f.getFilePath()).collect(Collectors.joining(", "));
     }
@@ -51,6 +66,7 @@ public class Pod {
        return "--pattern \""+getPatternString()+"\"";
     }
 
+    @Override
     public JSONObject toJson(){
         JSONObject out = new JSONObject();
         out.put("pod_name", getName());
@@ -68,4 +84,8 @@ public class Pod {
 
     }
 
+    @Override
+    public TestType getTestType() {
+        return TestType.RSPEC;
+    }
 }
